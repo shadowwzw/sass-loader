@@ -28,6 +28,9 @@ var matchCss = /\.css$/;
 var threadPoolSize = process.env.UV_THREADPOOL_SIZE || 4;
 var asyncSassJobQueue = async.queue(sass.render, threadPoolSize - 1);
 
+var loaderDuration = 0;
+var resolveDuration = 0;
+
 /**
  * The sass-loader makes node-sass available to webpack modules.
  *
@@ -35,6 +38,7 @@ var asyncSassJobQueue = async.queue(sass.render, threadPoolSize - 1);
  * @returns {string}
  */
 module.exports = function (content) {
+    var loaderStart = process.hrtime();
     var callback = this.async();
     var isSync = typeof callback !== 'function';
     var self = this;
@@ -98,6 +102,7 @@ module.exports = function (content) {
             };
         }
         return function asyncWebpackImporter(url, fileContext, done) {
+            var resolveStart = process.hrtime();
             var dirContext;
             var request;
 
@@ -106,7 +111,11 @@ module.exports = function (content) {
             request = utils.urlToRequest(url, sassOptions.root);
             dirContext = fileToDirContext(fileContext);
 
-            resolve(dirContext, url, getImportsToResolve(request), done);
+            resolve(dirContext, url, getImportsToResolve(request), function () {
+                var resolveEnd = process.hrtime(resolveStart);
+                resolveDuration += (resolveEnd[0] + resolveEnd[1] / 1e9);
+                done.apply(this, arguments);
+            });
         };
     }
 
@@ -286,6 +295,11 @@ module.exports = function (content) {
         }
 
         addIncludedFilesToWebpack(result.stats.includedFiles);
+        if (!isSync) {
+            var loaderEnd = process.hrtime(loaderStart);
+            loaderDuration += (loaderEnd[0] + loaderEnd[1] / 1e9);
+            console.log("loaderDuration", loaderDuration, "resolveDuration", resolveDuration, "ratio", resolveDuration / loaderDuration);
+        }
         callback(null, result.css.toString(), result.map);
     });
 };
