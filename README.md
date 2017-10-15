@@ -24,15 +24,15 @@ Looking for the webpack 1 loader? Check out the [archive/webpack-1 branch](https
 <h2 align="center">Install</h2>
 
 ```bash
-npm install sass-loader node-sass-with-bindings webpack --save-dev
+npm install sass2-loader node-sass-with-bindings webpack --save-dev
 ```
 
-The sass-loader requires [node-sass-with-bindings](https://github.com/sass/node-sass-with-bindings) and [webpack](https://github.com/webpack)
+The sass2-loader requires [node-sass-with-bindings](https://github.com/sass/node-sass-with-bindings) and [webpack](https://github.com/webpack)
 as [`peerDependency`](https://docs.npmjs.com/files/package.json#peerdependencies). Thus you are able to control the versions accurately.
 
 <h2 align="center">Examples</h2>
 
-Chain the sass-loader with the [css-loader](https://github.com/webpack-contrib/css-loader) and the [style-loader](https://github.com/webpack-contrib/style-loader) to immediately apply all styles to the DOM.
+Chain the sass2-loader with the [css-loader](https://github.com/webpack-contrib/css-loader) and the [style-loader](https://github.com/webpack-contrib/style-loader) to immediately apply all styles to the DOM.
 
 ```js
 // webpack.config.js
@@ -46,14 +46,14 @@ module.exports = {
             }, {
                 loader: "css-loader" // translates CSS into CommonJS
             }, {
-                loader: "sass-loader" // compiles Sass to CSS
+                loader: "sass2-loader" // compiles Sass to CSS
             }]
         }]
     }
 };
 ```
 
-You can also pass options directly to [node-sass-with-bindings](https://github.com/shadowwzw/sass-loader) by specifying an `options` property like this:
+You can also pass options directly to [node-sass-with-bindings](https://github.com/shadowwzw/sass2-loader) by specifying an `options` property like this:
 
 ```js
 // webpack.config.js
@@ -67,7 +67,7 @@ module.exports = {
             }, {
                 loader: "css-loader"
             }, {
-                loader: "sass-loader",
+                loader: "sass2-loader",
                 options: {
                     includePaths: ["absolute/path/a", "absolute/path/b"]
                 }
@@ -77,7 +77,7 @@ module.exports = {
 };
 ```
 
-See [node-sass-with-bindings](https://github.com/shadowwzw/sass-loader) for all available Sass options.
+See [node-sass-with-bindings](https://github.com/shadowwzw/sass2-loader) for all available Sass options.
 
 ### In production
 
@@ -100,7 +100,7 @@ module.exports = {
                 use: [{
                     loader: "css-loader"
                 }, {
-                    loader: "sass-loader"
+                    loader: "sass2-loader"
                 }],
                 // use style-loader in development
                 fallback: "style-loader"
@@ -117,7 +117,7 @@ module.exports = {
 
 ### Imports
 
-webpack provides an [advanced mechanism to resolve files](https://webpack.js.org/concepts/module-resolution/). The sass-loader uses node-sass-with-bindings' custom importer feature to pass all queries to the webpack resolving engine. Thus you can import your Sass modules from `node_modules`. Just prepend them with a `~` to tell webpack that this is not a relative import:
+webpack provides an [advanced mechanism to resolve files](https://webpack.js.org/concepts/module-resolution/). The sass2-loader uses node-sass-with-bindings' custom importer feature to pass all queries to the webpack resolving engine. Thus you can import your Sass modules from `node_modules`. Just prepend them with a `~` to tell webpack that this is not a relative import:
 
 ```css
 @import "~bootstrap/dist/css/bootstrap";
@@ -134,8 +134,8 @@ Since Sass/[libsass](https://github.com/sass/libsass) does not provide [url rewr
 
 More likely you will be disrupted by this second issue. It is natural to expect relative references to be resolved against the `.scss` file in which they are specified (like in regular `.css` files). Thankfully there are a two solutions to this problem:
 
-- Add the missing url rewriting using the [resolve-url-loader](https://github.com/bholloway/resolve-url-loader). Place it directly after the sass-loader in the loader chain.
-- Library authors usually provide a variable to modify the asset path. [bootstrap-sass](https://github.com/twbs/bootstrap-sass) for example has an `$icon-font-path`. Check out [this working bootstrap example](https://github.com/webpack-contrib/sass-loader/tree/master/test/bootstrapSass).
+- Add the missing url rewriting using the [resolve-url-loader](https://github.com/bholloway/resolve-url-loader). Place it directly after the sass2-loader in the loader chain.
+- Library authors usually provide a variable to modify the asset path. [bootstrap-sass](https://github.com/twbs/bootstrap-sass) for example has an `$icon-font-path`. Check out [this working bootstrap example](https://github.com/webpack-contrib/sass2-loader/tree/master/test/bootstrapSass).
 
 ### Extracting style sheets
 
@@ -148,7 +148,7 @@ There are two possibilities to extract a style sheet from the bundle:
 
 ### Source maps
 
-To enable CSS source maps, you'll need to pass the `sourceMap` option to the sass-loader *and* the css-loader. Your `webpack.config.js` should look like this:
+To enable CSS source maps, you'll need to pass the `sourceMap` option to the sass2-loader *and* the css-loader. Your `webpack.config.js` should look like this:
 
 ```javascript
 module.exports = {
@@ -164,7 +164,7 @@ module.exports = {
                     sourceMap: true
                 }
             }, {
-                loader: "sass-loader", options: {
+                loader: "sass2-loader", options: {
                     sourceMap: true
                 }
             }]
@@ -173,15 +173,15 @@ module.exports = {
 };
 ```
 
-If you want to edit the original Sass files inside Chrome, [there's a good blog post](https://medium.com/@toolmantim/getting-started-with-css-sourcemaps-and-in-browser-sass-editing-b4daab987fb0). Checkout [test/sourceMap](https://github.com/webpack-contrib/sass-loader/tree/master/test) for a running example.
+If you want to edit the original Sass files inside Chrome, [there's a good blog post](https://medium.com/@toolmantim/getting-started-with-css-sourcemaps-and-in-browser-sass-editing-b4daab987fb0). Checkout [test/sourceMap](https://github.com/webpack-contrib/sass2-loader/tree/master/test) for a running example.
 
 ### Environment variables
 
-If you want to prepend Sass code before the actual entry file, you can set the `data` option. In this case, the sass-loader will not override the `data` option but just append the entry's content. This is especially useful when some of your Sass variables depend on the environment:
+If you want to prepend Sass code before the actual entry file, you can set the `data` option. In this case, the sass2-loader will not override the `data` option but just append the entry's content. This is especially useful when some of your Sass variables depend on the environment:
 
 ```javascript
 {
-    loader: "sass-loader",
+    loader: "sass2-loader",
     options: {
         data: "$env: " + process.env.NODE_ENV + ";"
     }
@@ -214,9 +214,9 @@ If you want to prepend Sass code before the actual entry file, you can set the `
 
 [MIT](http://www.opensource.org/licenses/mit-license.php)
 
-[npm]: https://img.shields.io/npm/v/sass-loader.svg
-[npm-stats]: https://img.shields.io/npm/dm/sass-loader.svg
-[npm-url]: https://npmjs.com/package/sass-loader
+[npm]: https://img.shields.io/npm/v/sass2-loader.svg
+[npm-stats]: https://img.shields.io/npm/dm/sass2-loader.svg
+[npm-url]: https://npmjs.com/package/sass2-loader
 
 [node]: https://img.shields.io/node/v/sass-loader.svg
 [node-url]: https://nodejs.org

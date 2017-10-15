@@ -1,6 +1,6 @@
 {
   "name": "sass2-loader",
-  "version": "6.0.8",
+  "version": "6.0.9",
   "description": "Sass loader for webpack (uses node-sass-with-bindings)",
   "author": "J. Tangelder",
   "license": "MIT",
