@@ -1,6 +1,6 @@
 "use strict";
 
-const sass = require("node-sass");
+const sass = require("node-sass-with-bindings");
 
 module.exports = {
     "headings($from: 0, $to: 6)"(from, to) {

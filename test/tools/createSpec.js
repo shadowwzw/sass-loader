@@ -1,6 +1,6 @@
 "use strict";
 
-const sass = require("node-sass");
+const sass = require("node-sass-with-bindings");
 const os = require("os");
 const fs = require("fs");
 const path = require("path");
