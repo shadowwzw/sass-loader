@@ -24,10 +24,10 @@ Looking for the webpack 1 loader? Check out the [archive/webpack-1 branch](https
 <h2 align="center">Install</h2>
 
 ```bash
-npm install sass-loader node-sass webpack --save-dev
+npm install sass-loader node-sass-with-bindings webpack --save-dev
 ```
 
-The sass-loader requires [node-sass](https://github.com/sass/node-sass) and [webpack](https://github.com/webpack)
+The sass-loader requires [node-sass-with-bindings](https://github.com/sass/node-sass-with-bindings) and [webpack](https://github.com/webpack)
 as [`peerDependency`](https://docs.npmjs.com/files/package.json#peerdependencies). Thus you are able to control the versions accurately.
 
 <h2 align="center">Examples</h2>
@@ -53,7 +53,7 @@ module.exports = {
 };
 ```
 
-You can also pass options directly to [node-sass](https://github.com/andrew/node-sass) by specifying an `options` property like this:
+You can also pass options directly to [node-sass-with-bindings](https://github.com/shadowwzw/sass-loader) by specifying an `options` property like this:
 
 ```js
 // webpack.config.js
@@ -77,7 +77,7 @@ module.exports = {
 };
 ```
 
-See [node-sass](https://github.com/andrew/node-sass) for all available Sass options.
+See [node-sass-with-bindings](https://github.com/shadowwzw/sass-loader) for all available Sass options.
 
 ### In production
 
@@ -117,7 +117,7 @@ module.exports = {
 
 ### Imports
 
-webpack provides an [advanced mechanism to resolve files](https://webpack.js.org/concepts/module-resolution/). The sass-loader uses node-sass' custom importer feature to pass all queries to the webpack resolving engine. Thus you can import your Sass modules from `node_modules`. Just prepend them with a `~` to tell webpack that this is not a relative import:
+webpack provides an [advanced mechanism to resolve files](https://webpack.js.org/concepts/module-resolution/). The sass-loader uses node-sass-with-bindings' custom importer feature to pass all queries to the webpack resolving engine. Thus you can import your Sass modules from `node_modules`. Just prepend them with a `~` to tell webpack that this is not a relative import:
 
 ```css
 @import "~bootstrap/dist/css/bootstrap";
