@@ -1,6 +1,6 @@
 {
   "name": "sass2-loader",
-  "version": "6.0.9",
+  "version": "6.0.10",
   "description": "Sass loader for webpack (uses node-sass-with-bindings)",
   "author": "J. Tangelder",
   "license": "MIT",
@@ -65,10 +65,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/shadowwzw/sass-loader.git"
+    "url": "git://github.com/shadowwzw/sass2-loader.git"
   },
   "bugs": {
-    "url": "https://github.com/shadowwzw/sass-loader/issues"
+    "url": "https://github.com/shadowwzw/sass2-loader/issues"
   },
-  "homepage": "https://github.com/shadowwzw/sass-loader"
+  "homepage": "https://github.com/shadowwzw/sass2-loader"
 }
